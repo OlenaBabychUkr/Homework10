@@ -9,21 +9,14 @@ import random
 # Create a list of player names
 players = ["Olena", "Serhiy", "Nicoline", "Jeppe", "Andrine"]
 
-# Simulate 100 rounds for each player and store scores in a dictionary
-players_scores = dict()
-for name in players:
-    score = 0
-    for _ in range(100):
-        score += random.randint(0, 10)
-        players_scores[name] = score
+with open("game_results.csv", "w") as file:
+    pass  
 
-# Create a list of player name and score pairs
-results = []
-for name, score in players_scores.items():
-    results.append([name, score])
+# Simulate 100 rounds for each player and write each round's score to CSV
+for round in range(1, 101): 
+    for name in players:
+        score = random.randint(0, 1000)
+        result_row = f"{name},{score}\n"
+        with open("game_results.csv", "a") as f:
+            f.write(result_row)
 
-# Save the player results to a CSV file
-with open("game_results.csv", "w") as f:
-    for result in results:
-        name, score = result
-        f.write(f"{name},{score}\n")
